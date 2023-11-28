@@ -57,6 +57,9 @@ function evaluate(a, currentOperator, b) {
 let numbers = document.querySelectorAll(".number");
 
 // loop for all .number buttons and add to current number + display it
+for (let i = 0; i < numbers.length; i++) {
+  numbers[i].addEventListener("click", getCurrentNum1);
+}
 
 function getCurrentNum1(event) {
   if (displayNumber.textContent === "0") {
@@ -64,24 +67,32 @@ function getCurrentNum1(event) {
   }
   displayNumber.textContent += event.target.value;
   currentNum1 += event.target.value;
-  console.log(currentNum1);
-}
-
-for (let i = 0; i < numbers.length; i++) {
-  numbers[i].addEventListener("click", getCurrentNum1);
+  console.log("Current Num 1: " + currentNum1);
 }
 
 // loop for all .operant and store it to currentOperator; change to currentNum2
 let operants = document.querySelectorAll(".operant");
 
 for (let i = 0; i < operants.length; i++) {
-  operants[i].addEventListener("click", function () {
-    for (let i = 0; i < numbers.length; i++) {
-      numbers[i].removeEventListener("click", () => {});
-    }
-    currentOperator = operants[i].value;
-    console.log(currentNum1);
-    console.log(currentOperator);
-    // add new eventlistener to add currentNumber2 value
-  });
+  operants[i].addEventListener("click", getCurrentOperator);
+}
+
+function getCurrentOperator(event) {
+  // remove events from .numbers
+  for (let i = 0; i < numbers.length; i++) {
+    numbers[i].removeEventListener("click", getCurrentNum1);
+    numbers[i].addEventListener("click", getCurrentNum2); //add for current number 2
+  }
+  currentOperator = event.target.value;
+  displayNumber.textContent = "0";
+  console.log(currentOperator);
+}
+
+function getCurrentNum2(event) {
+  if (displayNumber.textContent === "0") {
+    displayNumber.textContent = "";
+  }
+  displayNumber.textContent += event.target.value;
+  currentNum2 += event.target.value;
+  console.log("Current Num 2: " + currentNum2);
 }
