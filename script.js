@@ -87,7 +87,7 @@ buttonEval.addEventListener("click", evaluate);
 
 function evaluate() {
   if (currentOperator == "+") {
-    return add(currentNum1, currentNum2);
+    displayNumber.textContent = add(currentNum1, currentNum2);
   }
   if (currentOperator == "-") {
     return substract(currentNum1, currentNum2);
@@ -98,5 +98,5 @@ function evaluate() {
   if (currentOperator == "/") {
     return divide(currentNum1, currentNum2);
   }
-  return console.log("No current operant?!");
+  return;
 }
