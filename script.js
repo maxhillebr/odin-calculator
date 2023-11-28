@@ -85,8 +85,12 @@ let buttonEval = document.querySelector(".evaluate");
 buttonEval.addEventListener("click", evaluate);
 
 function evaluate() {
+  displayNumber.textContent = "";
   if (currentOperator == "+") {
-    displayNumber.textContent = add(currentNum1, currentNum2);
+    let addResult = add(currentNum1, currentNum2);
+    displayNumber.textContent = addResult;
+    currentNum1 = addResult;
+    currentNum2 = "";
   }
   if (currentOperator == "-") {
     return substract(currentNum1, currentNum2);
