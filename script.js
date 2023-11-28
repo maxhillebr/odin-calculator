@@ -11,15 +11,15 @@ function add(a, b) {
 }
 
 function substract(a, b) {
-  return a - b;
+  return Number(a) - Number(b);
 }
 
 function multiply(a, b) {
-  return a * b;
+  return Number(a) * Number(b);
 }
 
 function divide(a, b) {
-  return a / b;
+  return Number(a) / Number(b);
 }
 
 // 2. A calculator operation will consist of a number, an operator, and another number. For example, 3 + 5. Create three variables for each of the parts of a calculator operation. Create a variable for the first number, the operator, and the second number. You’ll use these variables to update your display later.
