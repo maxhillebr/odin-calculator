@@ -58,14 +58,17 @@ let numbers = document.querySelectorAll(".number");
 
 // loop for all .number buttons and add to current number + display it
 
+function getCurrentNum1(event) {
+  if (displayNumber.textContent === "0") {
+    displayNumber.textContent = "";
+  }
+  displayNumber.textContent += event.target.value;
+  currentNum1 += event.target.value;
+  console.log(currentNum1);
+}
+
 for (let i = 0; i < numbers.length; i++) {
-  numbers[i].addEventListener("click", function getCurrentNum1() {
-    if (displayNumber.textContent === "0") {
-      displayNumber.textContent = "";
-    }
-    displayNumber.textContent += numbers[i].value;
-    currentNum1 += numbers[i].value;
-  });
+  numbers[i].addEventListener("click", getCurrentNum1);
 }
 
 // loop for all .operant and store it to currentOperator; change to currentNum2
