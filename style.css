@@ -10,6 +10,14 @@ body {
   background-color: #ddd1bd73;
 }
 
+.calc-before {
+  font-size: 1em;
+  padding: 1em;
+  min-height: 1.1em;
+  background-color: #ddd1bd73;
+  color: grey;
+}
+
 .calculator {
   display: grid;
   grid-template-columns: repeat(4, 1fr);

@@ -32,6 +32,8 @@ let currentOperator = "";
 
 // Update the Textcontent
 let displayNumber = document.querySelector(".calc-display");
+// present operator above display
+let displayBefore = document.querySelector(".calc-before");
 
 // store the num1 / num2 values
 let currentNum1 = "";
@@ -71,6 +73,7 @@ function getCurrentOperator(event) {
   }
   currentOperator = event.target.value;
   displayNumber.textContent = "0";
+  displayBefore.textContent = currentOperator;
   console.log("The CurrentOperator is: " + currentOperator);
 }
 
@@ -89,6 +92,7 @@ buttonEval.addEventListener("click", evaluate);
 
 function evaluate() {
   displayNumber.textContent = "";
+  displayBefore.textContent = "";
   if (currentOperator == "+") {
     let addResult = add(currentNum1, currentNum2);
     displayNumber.textContent = addResult;
