@@ -11,14 +11,17 @@ function add(a, b) {
 }
 
 function substract(a, b) {
+  console.log(Number(a) - Number(b));
   return Number(a) - Number(b);
 }
 
 function multiply(a, b) {
+  console.log(Number(a) * Number(b));
   return Number(a) * Number(b);
 }
 
 function divide(a, b) {
+  console.log(Number(a) / Number(b));
   return Number(a) / Number(b);
 }
 
@@ -93,13 +96,22 @@ function evaluate() {
     currentNum2 = "";
   }
   if (currentOperator == "-") {
-    return substract(currentNum1, currentNum2);
+    let addResult = substract(currentNum1, currentNum2);
+    displayNumber.textContent = addResult;
+    currentNum1 = addResult;
+    currentNum2 = "";
   }
   if (currentOperator == "*") {
-    return multiply(currentNum1, currentNum2);
+    let addResult = multiply(currentNum1, currentNum2);
+    displayNumber.textContent = addResult;
+    currentNum1 = addResult;
+    currentNum2 = "";
   }
   if (currentOperator == "/") {
-    return divide(currentNum1, currentNum2);
+    let addResult = divide(currentNum1, currentNum2);
+    displayNumber.textContent = addResult;
+    currentNum1 = addResult;
+    currentNum2 = "";
   }
   return;
 }
