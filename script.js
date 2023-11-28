@@ -69,7 +69,6 @@ function getCurrentOperator(event) {
   currentOperator = event.target.value;
   displayNumber.textContent = "0";
   console.log("The CurrentOperator is: " + currentOperator);
-  console.log(typeof currentOperator);
 }
 
 function getCurrentNum2(event) {
@@ -99,4 +98,21 @@ function evaluate() {
     return divide(currentNum1, currentNum2);
   }
   return;
+}
+
+// clear all
+let buttonAC = document.querySelector(".reset");
+buttonAC.addEventListener("click", clearAll);
+
+function clearAll() {
+  currentNum1 = "";
+  currentNum2 = "";
+  currentOperator = "";
+
+  displayNumber.textContent = "0";
+
+  for (let i = 0; i < numbers.length; i++) {
+    numbers[i].removeEventListener("click", getCurrentNum2);
+    numbers[i].addEventListener("click", getCurrentNum1);
+  }
 }
