@@ -137,3 +137,15 @@ function clearAll() {
     numbers[i].addEventListener("click", getCurrentNum1);
   }
 }
+
+// delete last
+let buttonDelete = document.querySelector(".delete");
+buttonDelete.addEventListener("click", deleteLastInput);
+
+function deleteLastInput() {
+  console.log(currentNum1.length);
+  let deleteStr = currentNum1.slice(0, -1);
+  if (currentNum1.length > 0) {
+    return deleteStr;
+  }
+}
