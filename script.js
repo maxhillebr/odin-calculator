@@ -73,7 +73,7 @@ function getCurrentOperator(event) {
   }
   currentOperator = event.target.value;
   displayNumber.textContent = "0";
-  displayBefore.textContent = currentOperator;
+  displayBefore.textContent = currentNum1 + " " + currentOperator;
   console.log("The CurrentOperator is: " + currentOperator);
 }
 
@@ -92,7 +92,7 @@ buttonEval.addEventListener("click", evaluate);
 
 function evaluate() {
   displayNumber.textContent = "";
-  displayBefore.textContent = "";
+  displayBefore.textContent += " " + currentNum2;
   if (currentOperator == "+") {
     let addResult = add(currentNum1, currentNum2);
     displayNumber.textContent = addResult;
@@ -130,6 +130,7 @@ function clearAll() {
   currentOperator = "";
 
   displayNumber.textContent = "0";
+  displayBefore.textContent = "";
 
   for (let i = 0; i < numbers.length; i++) {
     numbers[i].removeEventListener("click", getCurrentNum2);
