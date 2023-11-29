@@ -72,8 +72,13 @@ function getCurrentOperator(event) {
     numbers[i].addEventListener("click", getCurrentNum2);
   }
   currentOperator = event.target.value;
+
   displayNumber.textContent = "0";
   displayBefore.textContent = currentNum1 + " " + currentOperator;
+
+  buttonDelete.removeEventListener("click", deleteLastInput1);
+  buttonDelete.addEventListener("click", deleteLastInput2);
+
   console.log("The CurrentOperator is: " + currentOperator);
 }
 
@@ -93,11 +98,16 @@ buttonEval.addEventListener("click", evaluate);
 function evaluate() {
   displayNumber.textContent = "";
   displayBefore.textContent += " " + currentNum2;
+
+  buttonDelete.removeEventListener("click", deleteLastInput2);
+  buttonDelete.addEventListener("click", deleteLastInput1);
+
   if (currentOperator == "+") {
     let addResult = add(currentNum1, currentNum2);
     displayNumber.textContent = addResult;
     currentNum1 = addResult;
     currentNum2 = "";
+    console.log(typeof currentNum1);
   }
   if (currentOperator == "-") {
     let addResult = substract(currentNum1, currentNum2);
@@ -140,12 +150,39 @@ function clearAll() {
 
 // delete last
 let buttonDelete = document.querySelector(".delete");
-buttonDelete.addEventListener("click", deleteLastInput);
+buttonDelete.addEventListener("click", deleteLastInput1);
 
-function deleteLastInput() {
-  console.log(currentNum1.length);
+// delete for all currentNum1
+function deleteLastInput1() {
+  if (typeof currentNum1 === "number") {
+    currentNum1 = currentNum1.toString();
+    console.log(typeof currentNum1);
+  }
   let deleteStr = currentNum1.slice(0, -1);
-  if (currentNum1.length > 0) {
-    return deleteStr;
+  if (currentNum1.length > 1) {
+    currentNum1 = deleteStr;
+    displayNumber.textContent = currentNum1;
+    console.log("The currentNum1 is: " + currentNum1);
+  } else {
+    currentNum1 = "";
+    displayNumber.textContent = "0";
+    console.log("The currentNum1 is: " + currentNum1);
   }
 }
+
+// delete for all currentNum1
+function deleteLastInput2() {
+  console.log(currentNum2.length);
+
+  let deleteStr = currentNum2.slice(0, -1);
+  if (currentNum2.length > 1) {
+    currentNum2 = deleteStr;
+    displayNumber.textContent = currentNum2;
+  } else {
+    currentNum2 = "";
+    displayNumber.textContent = "0";
+  }
+}
+
+// if operator was clicked it changes to currentnum2
+// change the delete function for currentnum2
