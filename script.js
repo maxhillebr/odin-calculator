@@ -7,13 +7,7 @@
 
 function add(a, b) {
   console.log(Number(a) + Number(b));
-
-  if (a === "" || b === "") {
-    console.log("no value in a or b");
-  } else {
-    return;
-  }
-  Number(a) + Number(b);
+  return Number(a) + Number(b);
 }
 
 function substract(a, b) {
@@ -99,7 +93,7 @@ buttonEval.addEventListener("click", evaluate);
 function evaluate() {
   displayNumber.textContent = "";
   displayBefore.textContent += " " + currentNum2;
-  // checkForValues(currentNum1, currentOperator, currentNum2);
+  checkForValues(currentNum1, currentOperator, currentNum2);
   if (currentOperator == "+") {
     let addResult = add(currentNum1, currentNum2);
     displayNumber.textContent = addResult;
