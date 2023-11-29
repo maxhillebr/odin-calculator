@@ -184,5 +184,4 @@ function deleteLastInput2() {
   }
 }
 
-// if operator was clicked it changes to currentnum2
-// change the delete function for currentnum2
+// switches to currentNum2 if user deletes last element of currentNum1 after clicking evaluate
