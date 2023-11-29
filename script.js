@@ -140,12 +140,29 @@ function clearAll() {
 
 // delete last
 let buttonDelete = document.querySelector(".delete");
-buttonDelete.addEventListener("click", deleteLastInput);
+buttonDelete.addEventListener("click", deleteLastInput1);
 
-function deleteLastInput() {
-  console.log(currentNum1.length);
-  let deleteStr = currentNum1.slice(0, -1);
-  if (currentNum1.length > 0) {
-    return deleteStr;
+function deleteLastInput1() {
+  currentNum1 = currentNum1.toString();
+  let deleteStr1 = currentNum1.slice(0, -1);
+
+  if (currentNum1.length > 1 && currentOperator == "") {
+    displayNumber.textContent = deleteStr1;
+    currentNum1 = deleteStr1;
+    console.log(currentNum1);
+  } else if (currentNum1.length === 1) {
+    currentNum1 = "";
+    displayNumber.textContent = "0";
+  }
+  // for second current number
+  let deleteStr2 = currentNum2.slice(0, -1);
+
+  if (currentNum2.length > 1) {
+    displayNumber.textContent = deleteStr2;
+    currentNum2 = deleteStr2;
+    console.log(currentNum2);
+  } else if (currentNum2.length === 1) {
+    currentNum2 = "";
+    displayNumber.textContent = "0";
   }
 }
