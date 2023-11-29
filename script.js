@@ -7,7 +7,13 @@
 
 function add(a, b) {
   console.log(Number(a) + Number(b));
-  return Number(a) + Number(b);
+
+  if (a === "" || b === "") {
+    console.log("no value in a or b");
+  } else {
+    return;
+  }
+  Number(a) + Number(b);
 }
 
 function substract(a, b) {
@@ -93,6 +99,7 @@ buttonEval.addEventListener("click", evaluate);
 function evaluate() {
   displayNumber.textContent = "";
   displayBefore.textContent += " " + currentNum2;
+  // checkForValues(currentNum1, currentOperator, currentNum2);
   if (currentOperator == "+") {
     let addResult = add(currentNum1, currentNum2);
     displayNumber.textContent = addResult;
@@ -117,7 +124,26 @@ function evaluate() {
     currentNum1 = addResult;
     currentNum2 = "";
   }
-  return;
+}
+
+// control pressing evaluate if one value is missing
+
+function checkForValues(a, b, c) {
+  if (a === "") {
+    console.log("no value in currentNum1");
+    displayNumber.textContent = "0";
+    a = "";
+  }
+  if (currentOperator === "") {
+    console.log("no operator");
+    displayNumber.textContent = "0";
+    b = "";
+  }
+  if (currentNum2 === "") {
+    console.log("no value in currentNum2");
+    displayNumber.textContent = "0";
+    c = "";
+  }
 }
 
 // clear all
@@ -164,5 +190,22 @@ function deleteLastInput1() {
   } else if (currentNum2.length === 1) {
     currentNum2 = "";
     displayNumber.textContent = "0";
+  }
+}
+
+// add decimals
+let buttonDecimals = document.querySelector(".decimals");
+buttonDecimals.addEventListener("click", addCommaToNum);
+
+function addCommaToNum(event) {
+  let string = currentNum1;
+  let substring = ".";
+
+  if (string.includes(substring) === true) {
+    return console.log("only one comma allowed");
+  } else {
+    displayNumber.textContent += event.target.value;
+    currentNum1 += event.target.value;
+    console.log("Current Num 1: " + currentNum1);
   }
 }
