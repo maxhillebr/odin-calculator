@@ -6,23 +6,31 @@
 // 1. Your calculator is going to contain functions for all of the basic math operators you typically find on simple calculators, so start by creating functions for the following items and testing them in your browser’s console.
 
 function add(a, b) {
-  console.log(Number(a) + Number(b));
-  return Number(a) + Number(b);
+  let result = Number(a) + Number(b);
+  let roundResult = result.toFixed(2);
+  console.log("The roundResult is: " + roundResult);
+  return roundResult;
 }
 
 function substract(a, b) {
-  console.log(Number(a) - Number(b));
-  return Number(a) - Number(b);
+  let result = Number(a) + Number(b);
+  let roundResult = result.toFixed(2);
+  console.log("The roundResult is: " + roundResult);
+  return roundResult;
 }
 
 function multiply(a, b) {
-  console.log(Number(a) * Number(b));
-  return Number(a) * Number(b);
+  let result = Number(a) + Number(b);
+  let roundResult = result.toFixed(2);
+  console.log("The roundResult is: " + roundResult);
+  return roundResult;
 }
 
 function divide(a, b) {
-  console.log(Number(a) / Number(b));
-  return Number(a) / Number(b);
+  let result = Number(a) + Number(b);
+  let roundResult = result.toFixed(2);
+  console.log("The roundResult is: " + roundResult);
+  return roundResult;
 }
 
 // 2. A calculator operation will consist of a number, an operator, and another number. For example, 3 + 5. Create three variables for each of the parts of a calculator operation. Create a variable for the first number, the operator, and the second number. You’ll use these variables to update your display later.
