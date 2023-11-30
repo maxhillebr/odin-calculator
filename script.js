@@ -76,8 +76,13 @@ function getCurrentOperator(event) {
   displayNumber.textContent = "0";
   displayBefore.textContent = currentNum1 + " " + currentOperator;
 
+  // change delete button for currentNum2 input;
   buttonDelete.removeEventListener("click", deleteLastInput1);
   buttonDelete.addEventListener("click", deleteLastInput2);
+
+  // change dot button für currentNum2;
+  buttonDot.removeEventListener("click", createDot1);
+  buttonDot.addEventListener("click", createDot2);
 
   console.log("The CurrentOperator is: " + currentOperator);
 }
@@ -102,6 +107,10 @@ function evaluate() {
   // change delete button
   buttonDelete.removeEventListener("click", deleteLastInput2);
   buttonDelete.addEventListener("click", deleteLastInput1);
+
+  // change dot button for currentNum1
+  buttonDot.removeEventListener("click", createDot2);
+  buttonDot.addEventListener("click", createDot1);
 
   // change .numbers button to currentNum1
   for (let i = 0; i < numbers.length; i++) {
@@ -194,4 +203,50 @@ function deleteLastInput2() {
   }
 }
 
-// switches to currentNum2 if user deletes last element of currentNum1 after clicking evaluate
+// add comma to equation
+let buttonDot = document.querySelector(".dot");
+buttonDot.addEventListener("click", createDot1);
+
+function createDot1(event) {
+  if (typeof currentNum1 === "number") {
+    currentNum1 = currentNum1.toString();
+    console.log(typeof currentNum1);
+  }
+  // avoid dot dublicate
+  let substr = ".";
+  let checkForDot = currentNum1.includes(substr);
+
+  if (displayNumber.textContent == "0") {
+    currentNum1 = "0";
+  } else if (checkForDot === true) {
+    return console.log("Already pressed dot!");
+  } else {
+    displayNumber.textContent += event.target.value;
+    currentNum1 += event.target.value;
+    console.log("The currentNum1 with dot: " + currentNum1);
+  }
+}
+
+function createDot2(event) {
+  if (typeof currentNum2 === "number") {
+    currentNum2 = currentNum2.toString();
+    console.log(typeof currentNum2);
+  }
+  // avoid dot dublicate
+  let substr = ".";
+  let checkForDot = currentNum2.includes(substr);
+
+  if (displayNumber.textContent == "0") {
+    currentNum2 = "0";
+  } else if (checkForDot === true) {
+    return console.log("Already pressed dot!");
+  } else {
+    displayNumber.textContent += event.target.value;
+    currentNum2 += event.target.value;
+    console.log("The currentNum1 with dot: " + currentNum2);
+  }
+}
+
+// currentnum1 currentNum2 + "."
+// add one dot currentNum1 / currentNum2
+// check the current string if . is there. if true then dont add another dot
