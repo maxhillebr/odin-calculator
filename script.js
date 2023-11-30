@@ -99,15 +99,24 @@ function evaluate() {
   displayNumber.textContent = "";
   displayBefore.textContent += " " + currentNum2;
 
+  // change delete button
   buttonDelete.removeEventListener("click", deleteLastInput2);
   buttonDelete.addEventListener("click", deleteLastInput1);
+
+  // change .numbers button to currentNum1
+  for (let i = 0; i < numbers.length; i++) {
+    numbers[i].removeEventListener("click", getCurrentNum2);
+    numbers[i].addEventListener("click", getCurrentNum1);
+    console.log("Numbers is now for currentNum1");
+  }
 
   if (currentOperator == "+") {
     let addResult = add(currentNum1, currentNum2);
     displayNumber.textContent = addResult;
     currentNum1 = addResult;
     currentNum2 = "";
-    console.log(typeof currentNum1);
+    // console.log(typeof currentNum1);
+    // console.log("The currentNum1 and 2 is: " + currentNum1 + " " + currentNum2);
   }
   if (currentOperator == "-") {
     let addResult = substract(currentNum1, currentNum2);
@@ -167,6 +176,7 @@ function deleteLastInput1() {
     currentNum1 = "";
     displayNumber.textContent = "0";
     console.log("The currentNum1 is: " + currentNum1);
+    console.log(typeof currentNum1);
   }
 }
 
