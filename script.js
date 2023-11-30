@@ -7,28 +7,35 @@
 
 function add(a, b) {
   let result = Number(a) + Number(b);
-  let roundResult = result.toFixed(2);
+  let roundResult = Math.round(result * 1e2) / 1e2;
   console.log("The roundResult is: " + roundResult);
   return roundResult;
 }
 
 function substract(a, b) {
-  let result = Number(a) + Number(b);
-  let roundResult = result.toFixed(2);
+  let result = Number(a) - Number(b);
+  let roundResult = Math.round(result * 1e2) / 1e2;
   console.log("The roundResult is: " + roundResult);
   return roundResult;
 }
 
 function multiply(a, b) {
-  let result = Number(a) + Number(b);
-  let roundResult = result.toFixed(2);
+  let result = Number(a) * Number(b);
+  let roundResult = Math.round(result * 1e2) / 1e2;
   console.log("The roundResult is: " + roundResult);
   return roundResult;
 }
 
 function divide(a, b) {
-  let result = Number(a) + Number(b);
-  let roundResult = result.toFixed(2);
+  let result = Number(a) / Number(b);
+  let roundResult = Math.round(result * 1e2) / 1e2;
+  console.log("The roundResult is: " + roundResult);
+  return roundResult;
+}
+
+function remainder(a, b) {
+  let result = Number(a) % Number(b);
+  let roundResult = Math.round(result * 1e2) / 1e2;
   console.log("The roundResult is: " + roundResult);
   return roundResult;
 }
@@ -149,6 +156,12 @@ function evaluate() {
   }
   if (currentOperator == "/") {
     let addResult = divide(currentNum1, currentNum2);
+    displayNumber.textContent = addResult;
+    currentNum1 = addResult;
+    currentNum2 = "";
+  }
+  if (currentOperator == "%") {
+    let addResult = remainder(currentNum1, currentNum2);
     displayNumber.textContent = addResult;
     currentNum1 = addResult;
     currentNum2 = "";
