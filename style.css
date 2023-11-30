@@ -1,3 +1,7 @@
+* {
+  font-family: "Open Sans", sans-serif;
+}
+
 body {
   display: flex;
   justify-content: center;
@@ -5,12 +9,14 @@ body {
 }
 
 .calc-display {
+  text-align: right;
   font-size: 1.5em;
   padding: 1em;
   background-color: #ddd1bd73;
 }
 
 .calc-before {
+  text-align: right;
   font-size: 1em;
   padding: 1em;
   min-height: 1.1em;
