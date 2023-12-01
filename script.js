@@ -6,23 +6,38 @@
 // 1. Your calculator is going to contain functions for all of the basic math operators you typically find on simple calculators, so start by creating functions for the following items and testing them in your browser’s console.
 
 function add(a, b) {
-  console.log(Number(a) + Number(b));
-  return Number(a) + Number(b);
+  let result = Number(a) + Number(b);
+  let roundResult = Math.round(result * 1e2) / 1e2;
+  console.log("The roundResult is: " + roundResult);
+  return roundResult;
 }
 
 function substract(a, b) {
-  console.log(Number(a) - Number(b));
-  return Number(a) - Number(b);
+  let result = Number(a) - Number(b);
+  let roundResult = Math.round(result * 1e2) / 1e2;
+  console.log("The roundResult is: " + roundResult);
+  return roundResult;
 }
 
 function multiply(a, b) {
-  console.log(Number(a) * Number(b));
-  return Number(a) * Number(b);
+  let result = Number(a) * Number(b);
+  let roundResult = Math.round(result * 1e2) / 1e2;
+  console.log("The roundResult is: " + roundResult);
+  return roundResult;
 }
 
 function divide(a, b) {
-  console.log(Number(a) / Number(b));
-  return Number(a) / Number(b);
+  let result = Number(a) / Number(b);
+  let roundResult = Math.round(result * 1e2) / 1e2;
+  console.log("The roundResult is: " + roundResult);
+  return roundResult;
+}
+
+function remainder(a, b) {
+  let result = Number(a) % Number(b);
+  let roundResult = Math.round(result * 1e2) / 1e2;
+  console.log("The roundResult is: " + roundResult);
+  return roundResult;
 }
 
 // 2. A calculator operation will consist of a number, an operator, and another number. For example, 3 + 5. Create three variables for each of the parts of a calculator operation. Create a variable for the first number, the operator, and the second number. You’ll use these variables to update your display later.
@@ -72,8 +87,18 @@ function getCurrentOperator(event) {
     numbers[i].addEventListener("click", getCurrentNum2);
   }
   currentOperator = event.target.value;
+
   displayNumber.textContent = "0";
   displayBefore.textContent = currentNum1 + " " + currentOperator;
+
+  // change delete button for currentNum2 input;
+  buttonDelete.removeEventListener("click", deleteLastInput1);
+  buttonDelete.addEventListener("click", deleteLastInput2);
+
+  // change dot button für currentNum2;
+  buttonDot.removeEventListener("click", createDot1);
+  buttonDot.addEventListener("click", createDot2);
+
   console.log("The CurrentOperator is: " + currentOperator);
 }
 
@@ -93,12 +118,29 @@ buttonEval.addEventListener("click", evaluate);
 function evaluate() {
   displayNumber.textContent = "";
   displayBefore.textContent += " " + currentNum2;
-  checkForValues(currentNum1, currentOperator, currentNum2);
+
+  // change delete button
+  buttonDelete.removeEventListener("click", deleteLastInput2);
+  buttonDelete.addEventListener("click", deleteLastInput1);
+
+  // change dot button for currentNum1
+  buttonDot.removeEventListener("click", createDot2);
+  buttonDot.addEventListener("click", createDot1);
+
+  // change .numbers button to currentNum1
+  for (let i = 0; i < numbers.length; i++) {
+    numbers[i].removeEventListener("click", getCurrentNum2);
+    numbers[i].addEventListener("click", getCurrentNum1);
+    console.log("Numbers is now for currentNum1");
+  }
+
   if (currentOperator == "+") {
     let addResult = add(currentNum1, currentNum2);
     displayNumber.textContent = addResult;
     currentNum1 = addResult;
     currentNum2 = "";
+    // console.log(typeof currentNum1);
+    // console.log("The currentNum1 and 2 is: " + currentNum1 + " " + currentNum2);
   }
   if (currentOperator == "-") {
     let addResult = substract(currentNum1, currentNum2);
@@ -118,26 +160,13 @@ function evaluate() {
     currentNum1 = addResult;
     currentNum2 = "";
   }
-}
-
-// control pressing evaluate if one value is missing
-
-function checkForValues(a, b, c) {
-  if (a === "") {
-    console.log("no value in currentNum1");
-    displayNumber.textContent = "0";
-    a = "";
+  if (currentOperator == "%") {
+    let addResult = remainder(currentNum1, currentNum2);
+    displayNumber.textContent = addResult;
+    currentNum1 = addResult;
+    currentNum2 = "";
   }
-  if (currentOperator === "") {
-    console.log("no operator");
-    displayNumber.textContent = "0";
-    b = "";
-  }
-  if (currentNum2 === "") {
-    console.log("no value in currentNum2");
-    displayNumber.textContent = "0";
-    c = "";
-  }
+  return;
 }
 
 // clear all
@@ -162,44 +191,79 @@ function clearAll() {
 let buttonDelete = document.querySelector(".delete");
 buttonDelete.addEventListener("click", deleteLastInput1);
 
+// delete for all currentNum1
 function deleteLastInput1() {
-  currentNum1 = currentNum1.toString();
-  let deleteStr1 = currentNum1.slice(0, -1);
-
-  if (currentNum1.length > 1 && currentOperator == "") {
-    displayNumber.textContent = deleteStr1;
-    currentNum1 = deleteStr1;
-    console.log(currentNum1);
-  } else if (currentNum1.length === 1) {
+  if (typeof currentNum1 === "number") {
+    currentNum1 = currentNum1.toString();
+    console.log(typeof currentNum1);
+  }
+  let deleteStr = currentNum1.slice(0, -1);
+  if (currentNum1.length > 1) {
+    currentNum1 = deleteStr;
+    displayNumber.textContent = currentNum1;
+    console.log("The currentNum1 is: " + currentNum1);
+  } else {
     currentNum1 = "";
     displayNumber.textContent = "0";
+    console.log("The currentNum1 is: " + currentNum1);
+    console.log(typeof currentNum1);
   }
-  // for second current number
-  let deleteStr2 = currentNum2.slice(0, -1);
+}
 
+// delete for all currentNum1
+function deleteLastInput2() {
+  console.log(currentNum2.length);
+
+  let deleteStr = currentNum2.slice(0, -1);
   if (currentNum2.length > 1) {
-    displayNumber.textContent = deleteStr2;
-    currentNum2 = deleteStr2;
-    console.log(currentNum2);
-  } else if (currentNum2.length === 1) {
+    currentNum2 = deleteStr;
+    displayNumber.textContent = currentNum2;
+  } else {
     currentNum2 = "";
     displayNumber.textContent = "0";
   }
 }
 
-// add decimals
-let buttonDecimals = document.querySelector(".decimals");
-buttonDecimals.addEventListener("click", addCommaToNum);
+// add comma to equation
+let buttonDot = document.querySelector(".dot");
+buttonDot.addEventListener("click", createDot1);
 
-function addCommaToNum(event) {
-  let string = currentNum1;
-  let substring = ".";
+function createDot1(event) {
+  if (typeof currentNum1 === "number") {
+    currentNum1 = currentNum1.toString();
+    console.log(typeof currentNum1);
+  }
+  // avoid dot dublicate
+  let substr = ".";
+  let checkForDot = currentNum1.includes(substr);
 
-  if (string.includes(substring) === true) {
-    return console.log("only one comma allowed");
+  if (displayNumber.textContent == "0") {
+    currentNum1 = "0";
+  } else if (checkForDot === true) {
+    return console.log("Already pressed dot!");
   } else {
     displayNumber.textContent += event.target.value;
     currentNum1 += event.target.value;
-    console.log("Current Num 1: " + currentNum1);
+    console.log("The currentNum1 with dot: " + currentNum1);
+  }
+}
+
+function createDot2(event) {
+  if (typeof currentNum2 === "number") {
+    currentNum2 = currentNum2.toString();
+    console.log(typeof currentNum2);
+  }
+  // avoid dot dublicate
+  let substr = ".";
+  let checkForDot = currentNum2.includes(substr);
+
+  if (displayNumber.textContent == "0") {
+    currentNum2 = "0";
+  } else if (checkForDot === true) {
+    return console.log("Already pressed dot!");
+  } else {
+    displayNumber.textContent += event.target.value;
+    currentNum2 += event.target.value;
+    console.log("The currentNum1 with dot: " + currentNum2);
   }
 }
