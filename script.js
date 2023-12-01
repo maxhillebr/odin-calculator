@@ -267,7 +267,3 @@ function createDot2(event) {
     console.log("The currentNum1 with dot: " + currentNum2);
   }
 }
-
-// currentnum1 currentNum2 + "."
-// add one dot currentNum1 / currentNum2
-// check the current string if . is there. if true then dont add another dot
