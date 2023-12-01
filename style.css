@@ -10,7 +10,8 @@ body {
 }
 
 .calc-container {
-  max-height: 540px;
+  height: 580px;
+  width: 368px;
   background-color: white;
   box-shadow: 5px 9px 20px 9px #e3e3e3;
   border-radius: 30px;
@@ -20,23 +21,42 @@ body {
   text-align: right;
   font-size: 1.5em;
   padding: 1em;
+  border-bottom: 1px solid #dbdbdb;
 }
 
 .calc-before {
   text-align: right;
   font-size: 1em;
   padding: 1em;
-  min-height: 1.1em;
+  min-height: 31px;
   color: grey;
 }
 
 .calculator {
-  border-top: 1px solid #dbdbdb;
+  padding: 10px 21px 10px 21px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   grid-template-rows: repeat(5, 1fr);
   grid-column-gap: 1px;
   grid-row-gap: 1px;
+}
+
+.special-eval {
+  background-color: #5699ff;
+  border-radius: 10px;
+  color: #fff;
+  box-shadow: 2px 5px 20px 0px lightgrey;
+  font-weight: bold;
+  font-size: 38px;
+}
+
+.special-eval:hover {
+  background-color: #d6e7ff !important;
+  color: #5699ff;
+}
+
+.evaluate {
+  background-color: #fff !important;
 }
 
 button {
@@ -45,6 +65,19 @@ button {
   padding: 1em;
   background-color: #ffffff00;
 }
+
+button:hover {
+  background-color: #f5f5f5;
+  border-radius: 25px;
+}
+
+button:active {
+  background-color: #fff;
+}
+
+/* button css from codepen */
+
+/* end of button css from codepen  */
 
 .number,
 .dot {
@@ -56,11 +89,7 @@ button {
 
 .operant,
 .evaluate {
-  color: #4f96ff;
-}
-
-button:hover {
-  background-color: #433f3f;
+  color: #5699ff;
 }
 
 .div1 {
@@ -118,5 +147,7 @@ button:hover {
   grid-area: 5 / 3 / 6 / 4;
 }
 .div19 {
+  /* equal button */
   grid-area: 5 / 4 / 6 / 5;
+  padding: 14px;
 }
