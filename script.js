@@ -73,6 +73,28 @@ function getCurrentNum1(event) {
   console.log("Current Num 1: " + currentNum1);
 }
 
+// ------------------------------
+// keyboard support
+document.addEventListener("keydown", getCurrentTest);
+
+function getCurrentTest(event) {
+  let button1 = document.querySelector(".div13");
+
+  if (event.key == "1") {
+    if (displayNumber.textContent === "0") {
+      displayNumber.textContent = "";
+    }
+    displayNumber.textContent += button1.value;
+    currentNum1 += button1.value;
+    button1.style.backgroundColor = "#f5f5f5";
+    console.log("Current Num 1: " + currentNum1);
+  } else {
+    return console.log("not button 1");
+  }
+}
+
+// ------------------------------
+
 // loop for all .operant and store it to currentOperator; change to currentNum2
 let operants = document.querySelectorAll(".operant");
 
