@@ -78,13 +78,21 @@ function getCurrentNum1(event) {
 document.addEventListener("keydown", getCurrentTest);
 
 function getCurrentTest(event) {
+  if (displayNumber.textContent === "0") {
+    displayNumber.textContent = "";
+  }
+
   let button1 = document.querySelector(".div13");
   let button2 = document.querySelector(".div14");
+  let button3 = document.querySelector(".div15");
+  let button4 = document.querySelector(".div9");
+  let button5 = document.querySelector(".div10");
+  let button6 = document.querySelector(".div11");
+  let button7 = document.querySelector(".div5");
+  let button8 = document.querySelector(".div6");
+  let button9 = document.querySelector(".div7");
 
   if (event.key == "1") {
-    if (displayNumber.textContent === "0") {
-      displayNumber.textContent = "";
-    }
     displayNumber.textContent += button1.value;
     currentNum1 += button1.value;
     button1.style.backgroundColor = "#f5f5f5";
@@ -92,15 +100,52 @@ function getCurrentTest(event) {
   }
 
   if (event.key == "2") {
-    if (displayNumber.textContent === "0") {
-      displayNumber.textContent = "";
-    }
     displayNumber.textContent += button2.value;
     currentNum1 += button2.value;
     button2.style.backgroundColor = "#f5f5f5";
     console.log("Current Num 1: " + currentNum1);
-  } else {
-    return console.log("not button 1 or 2");
+  }
+  if (event.key == "3") {
+    displayNumber.textContent += button3.value;
+    currentNum1 += button3.value;
+    button3.style.backgroundColor = "#f5f5f5";
+    console.log("Current Num 1: " + currentNum1);
+  }
+  if (event.key == "4") {
+    displayNumber.textContent += button4.value;
+    currentNum1 += button4.value;
+    button4.style.backgroundColor = "#f5f5f5";
+    console.log("Current Num 1: " + currentNum1);
+  }
+  if (event.key == "5") {
+    displayNumber.textContent += button5.value;
+    currentNum1 += button5.value;
+    button5.style.backgroundColor = "#f5f5f5";
+    console.log("Current Num 1: " + currentNum1);
+  }
+  if (event.key == "6") {
+    displayNumber.textContent += button6.value;
+    currentNum1 += button6.value;
+    button6.style.backgroundColor = "#f5f5f5";
+    console.log("Current Num 1: " + currentNum1);
+  }
+  if (event.key == "7") {
+    displayNumber.textContent += button7.value;
+    currentNum1 += button7.value;
+    button7.style.backgroundColor = "#f5f5f5";
+    console.log("Current Num 1: " + currentNum1);
+  }
+  if (event.key == "8") {
+    displayNumber.textContent += button8.value;
+    currentNum1 += button8.value;
+    button8.style.backgroundColor = "#f5f5f5";
+    console.log("Current Num 1: " + currentNum1);
+  }
+  if (event.key == "9") {
+    displayNumber.textContent += button9.value;
+    currentNum1 += button9.value;
+    button9.style.backgroundColor = "#f5f5f5";
+    console.log("Current Num 1: " + currentNum1);
   }
 }
 
