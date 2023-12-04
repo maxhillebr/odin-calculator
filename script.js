@@ -79,6 +79,7 @@ document.addEventListener("keydown", getCurrentTest);
 
 function getCurrentTest(event) {
   let button1 = document.querySelector(".div13");
+  let button2 = document.querySelector(".div14");
 
   if (event.key == "1") {
     if (displayNumber.textContent === "0") {
@@ -88,8 +89,18 @@ function getCurrentTest(event) {
     currentNum1 += button1.value;
     button1.style.backgroundColor = "#f5f5f5";
     console.log("Current Num 1: " + currentNum1);
+  }
+
+  if (event.key == "2") {
+    if (displayNumber.textContent === "0") {
+      displayNumber.textContent = "";
+    }
+    displayNumber.textContent += button2.value;
+    currentNum1 += button2.value;
+    button2.style.backgroundColor = "#f5f5f5";
+    console.log("Current Num 1: " + currentNum1);
   } else {
-    return console.log("not button 1");
+    return console.log("not button 1 or 2");
   }
 }
 
