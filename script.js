@@ -77,8 +77,8 @@ for (let i = 0; i < numbers.length; i++) {
 // ------------ test --------------------
 // nothing > keydown > adds to currentNum1 true >
 function getCurrentNum1(event) {
-  let keyTest = /(^[0-9]+$|^$|^\s$)/gm.test(currentNum1);
-  // let keyTest = isFinite(event.key);
+  // let keyTest = /(^[0-9]+$|^$|^\s$)/gm.test(currentNum1);
+  let keyTest = isFinite(event.key);
   console.log(keyTest);
 
   if (displayNumber.textContent === "0") {
