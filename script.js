@@ -80,13 +80,10 @@ function getCurrentNum1(event) {
   // let keyTest = /(^[0-9]+$|^$|^\s$)/gm.test(currentNum1);
   let keyTest = isFinite(event.key);
   console.log(keyTest);
+  console.log(event.key);
 
   if (displayNumber.textContent === "0") {
     displayNumber.textContent = "";
-  }
-
-  if (displayNumber.textContent === "" && keyTest === false) {
-    displayNumber.textContent = "0";
   }
 
   // click event
@@ -96,6 +93,10 @@ function getCurrentNum1(event) {
     console.log("Current Num 1 click: " + currentNum1);
     // keydown event
   } else if (event.type === "keydown" && keyTest === true) {
+    // check if it's a digit
+    if (event.key.length > 1 || event.ctrlKey || event.key === " ") {
+      return console.log(currentNum1.length);
+    }
     displayNumber.textContent += event.key;
     currentNum1 += event.key;
     console.log("Current Num 1 keydown: " + currentNum1);
