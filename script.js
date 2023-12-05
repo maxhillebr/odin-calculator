@@ -75,29 +75,38 @@ for (let i = 0; i < numbers.length; i++) {
 // }
 
 // ------------ test --------------------
-
+// nothing > keydown > adds to currentNum1 true >
 function getCurrentNum1(event) {
+  let keyTest = /(^[0-9]+$|^$|^\s$)/gm.test(currentNum1);
+  // let keyTest = isFinite(event.key);
+  console.log(keyTest);
+
   if (displayNumber.textContent === "0") {
     displayNumber.textContent = "";
   }
+
+  if (displayNumber.textContent === "" && keyTest === false) {
+    displayNumber.textContent = "0";
+  }
+
   // click event
   if (event.type === "click") {
     displayNumber.textContent += event.target.value;
     currentNum1 += event.target.value;
     console.log("Current Num 1 click: " + currentNum1);
     // keydown event
-  } else if (event.type === "keydown") {
+  } else if (event.type === "keydown" && keyTest === true) {
     displayNumber.textContent += event.key;
     currentNum1 += event.key;
     console.log("Current Num 1 keydown: " + currentNum1);
     console.log(typeof event.key);
+  } else {
+    console.log("some problem?2");
   }
 }
 
-// ------------------------------
-// keyboard support
+// ---------keyboard support currentNum1--------------
 document.addEventListener("keydown", getCurrentNum1);
-
 // ------------------------------
 
 // loop for all .operant and store it to currentOperator; change to currentNum2
@@ -113,10 +122,17 @@ function getCurrentOperator(event) {
     numbers[i].removeEventListener("click", getCurrentNum1);
     numbers[i].addEventListener("click", getCurrentNum2);
   }
-  currentOperator = event.target.value;
-
-  displayNumber.textContent = "0";
-  displayBefore.textContent = currentNum1 + " " + currentOperator;
+  // click event
+  if (event.type === "click") {
+    currentOperator = event.target.value;
+    displayNumber.textContent = "0";
+    displayBefore.textContent = currentNum1 + " " + currentOperator;
+    // keydown event
+  } else if (event.type === "keydown") {
+    currentOperator = event.key;
+    displayNumber.textContent = "0";
+    displayBefore.textContent = currentNum1 + " " + currentOperator;
+  }
 
   // change delete button for currentNum2 input;
   buttonDelete.removeEventListener("click", deleteLastInput1);
