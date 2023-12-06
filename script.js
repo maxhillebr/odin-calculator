@@ -110,7 +110,10 @@ function getCurrentNum1(event) {
   if (displayNumber.textContent === "" || displayNumber.textContent === " ") {
     displayNumber.textContent = "0";
   }
-  console.log("some problem?2");
+  // check for operator and give event to function
+  if (event.key === "/") {
+    getCurrentOperator(event);
+  }
 }
 
 // loop for all .operant and store it to currentOperator; change to currentNum2
@@ -131,12 +134,16 @@ function getCurrentOperator(event) {
     currentOperator = event.target.value;
     displayNumber.textContent = "0";
     displayBefore.textContent = currentNum1 + " " + currentOperator;
-    // keydown event
-  } else if (event.type === "keydown") {
+  }
+  // keydown event
+  // --------- handle keyboard input begin-------------
+  else if (event.type === "keydown") {
+    console.log("keydown");
     currentOperator = event.key;
     displayNumber.textContent = "0";
     displayBefore.textContent = currentNum1 + " " + currentOperator;
   }
+  // --------- handle keyboard input end -------------
 
   // change delete button for currentNum2 input;
   buttonDelete.removeEventListener("click", deleteLastInput1);
