@@ -64,24 +64,15 @@ for (let i = 0; i < numbers.length; i++) {
   numbers[i].addEventListener("click", getCurrentNum1);
 }
 
-// ------------ good function -----------
-// function getCurrentNum1(event) {
-//   if (displayNumber.textContent === "0") {
-//     displayNumber.textContent = "";
-//   }
-//   displayNumber.textContent += event.target.value;
-//   currentNum1 += event.target.value;
-//   console.log("Current Num 1: " + currentNum1);
-// }
+// keyboard support currentNum1
+document.addEventListener("keydown", getCurrentNum1);
 
-// ------------ test --------------------
-// nothing > keydown > adds to currentNum1 true >
+// currentNum 1 function, works with click and keydown
 function getCurrentNum1(event) {
-  // let keyTest = /(^[0-9]+$|^$|^\s$)/gm.test(currentNum1);
+  // test variable for numbers
   let keyTest = isFinite(event.key);
-  console.log(keyTest);
-  console.log(event.key);
 
+  // solve problem with 0 at the beginning
   if (displayNumber.textContent === "0") {
     displayNumber.textContent = "";
   }
@@ -91,24 +82,36 @@ function getCurrentNum1(event) {
     displayNumber.textContent += event.target.value;
     currentNum1 += event.target.value;
     console.log("Current Num 1 click: " + currentNum1);
+
     // keydown event
   } else if (event.type === "keydown" && keyTest === true) {
-    // check if it's a digit
-    if (event.key.length > 1 || event.ctrlKey || event.key === " ") {
-      return console.log(currentNum1.length);
+    // check if keydown is a digit
+    if (
+      event.key.length > 1 ||
+      event.ctrlKey ||
+      event.altKey ||
+      event.key === " "
+    ) {
+      // change text if the first key is spacebar or not a number
+      if (
+        displayNumber.textContent === "" ||
+        displayNumber.textContent === " "
+      ) {
+        displayNumber.textContent = "0";
+      }
+      return;
     }
+    // add button key to currentNum1
     displayNumber.textContent += event.key;
     currentNum1 += event.key;
     console.log("Current Num 1 keydown: " + currentNum1);
-    console.log(typeof event.key);
-  } else {
-    console.log("some problem?2");
   }
+  // check if first input is nothing
+  if (displayNumber.textContent === "" || displayNumber.textContent === " ") {
+    displayNumber.textContent = "0";
+  }
+  console.log("some problem?2");
 }
-
-// ---------keyboard support currentNum1--------------
-document.addEventListener("keydown", getCurrentNum1);
-// ------------------------------
 
 // loop for all .operant and store it to currentOperator; change to currentNum2
 let operants = document.querySelectorAll(".operant");
