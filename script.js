@@ -114,6 +114,8 @@ function getCurrentNum1(event) {
   checkForKeyDownOperator(event);
   // add dot
   checkForKeyDownDot1(event);
+  // delete last for currentNum1 keydown
+  deleteLastKeyDown1(event);
 }
 
 function checkForKeyDownOperator(event) {
@@ -252,6 +254,8 @@ function getCurrentNum2(event) {
   evaluateKeyDown(event);
   // add dot
   checkForKeyDownDot2(event);
+  // add delete last
+  deleteLastKeyDown2(event);
 }
 
 // start evalute on specific key
@@ -380,6 +384,20 @@ function deleteLastInput2() {
   } else {
     currentNum2 = "";
     displayNumber.textContent = "0";
+  }
+}
+
+// delete for keydown currentNum1
+function deleteLastKeyDown1(event) {
+  if (event.key == "Backspace") {
+    return deleteLastInput1();
+  }
+}
+
+// delete for keydown currentNum1
+function deleteLastKeyDown2(event) {
+  if (event.key == "Backspace") {
+    return deleteLastInput2();
   }
 }
 
