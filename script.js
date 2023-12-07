@@ -112,6 +112,8 @@ function getCurrentNum1(event) {
   }
   // check for operator and give event to keydown function
   checkForKeyDownOperator(event);
+  // add dot
+  checkForKeyDownDot1(event);
 }
 
 function checkForKeyDownOperator(event) {
@@ -248,6 +250,8 @@ function getCurrentNum2(event) {
   }
   //  add evaluate function for keydown
   evaluateKeyDown(event);
+  // add dot
+  checkForKeyDownDot2(event);
 }
 
 // start evalute on specific key
@@ -365,7 +369,7 @@ function deleteLastInput1() {
   }
 }
 
-// delete for all currentNum1
+// delete for all currentNum2
 function deleteLastInput2() {
   console.log(currentNum2.length);
 
@@ -397,9 +401,18 @@ function createDot1(event) {
   } else if (checkForDot === true) {
     return console.log("Already pressed dot!");
   } else {
-    displayNumber.textContent += event.target.value;
-    currentNum1 += event.target.value;
-    console.log("The currentNum1 with dot: " + currentNum1);
+    // click event
+    if (event.type === "click") {
+      displayNumber.textContent += event.target.value;
+      currentNum1 += event.target.value;
+      console.log("Current Num 1 click: " + currentNum1);
+
+      // keydown event
+    } else if (event.type == "keydown") {
+      displayNumber.textContent += event.key;
+      currentNum1 += event.key;
+      console.log("The currentNum1 with dot keydown: " + currentNum1);
+    }
   }
 }
 
@@ -417,8 +430,34 @@ function createDot2(event) {
   } else if (checkForDot === true) {
     return console.log("Already pressed dot!");
   } else {
-    displayNumber.textContent += event.target.value;
-    currentNum2 += event.target.value;
-    console.log("The currentNum1 with dot: " + currentNum2);
+    // click event
+    if (event.type === "click") {
+      displayNumber.textContent += event.target.value;
+      currentNum2 += event.target.value;
+      console.log("Current Num 2 click: " + currentNum2);
+
+      // keydown event
+    } else if (event.type == "keydown") {
+      displayNumber.textContent += event.key;
+      currentNum2 += event.key;
+      console.log("The currentNum2 with dot keydown: " + currentNum2);
+    }
+  }
+}
+
+// comma for keydown currentNum1 and currentNum2
+function checkForKeyDownDot1(event) {
+  if (currentNum1 != "") {
+    if (event.key === ".") {
+      return createDot1(event);
+    }
+  }
+}
+
+function checkForKeyDownDot2(event) {
+  if (currentNum2 != "") {
+    if (event.key === ".") {
+      return createDot2(event);
+    }
   }
 }
