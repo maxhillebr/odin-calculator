@@ -116,6 +116,8 @@ function getCurrentNum1(event) {
   checkForKeyDownDot1(event);
   // delete last for currentNum1 keydown
   deleteLastKeyDown1(event);
+  // clear all button functionality
+  clearAllKeyDown(event);
 }
 
 function checkForKeyDownOperator(event) {
@@ -256,6 +258,8 @@ function getCurrentNum2(event) {
   checkForKeyDownDot2(event);
   // add delete last
   deleteLastKeyDown2(event);
+  // clear all button functionality
+  clearAllKeyDown(event);
 }
 
 // start evalute on specific key
@@ -347,6 +351,16 @@ function clearAll() {
   for (let i = 0; i < numbers.length; i++) {
     numbers[i].removeEventListener("click", getCurrentNum2);
     numbers[i].addEventListener("click", getCurrentNum1);
+  }
+  // keyboard support remove currentNum1 add currentNum2
+  document.removeEventListener("keydown", getCurrentNum2);
+  document.addEventListener("keydown", getCurrentNum1);
+}
+
+// clear all for keydown ESC
+function clearAllKeyDown(event) {
+  if (event.key === "Escape") {
+    return clearAll();
   }
 }
 
