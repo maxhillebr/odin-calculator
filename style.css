@@ -15,6 +15,7 @@ body {
   background-color: white;
   box-shadow: 10px 12px 20px 4px #cadff1;
   border-radius: 30px;
+  word-break: break-all;
 }
 
 .calc-display {
