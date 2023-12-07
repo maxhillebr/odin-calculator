@@ -111,10 +111,10 @@ function getCurrentNum1(event) {
     displayNumber.textContent = "0";
   }
   // check for operator and give event to keydown function
-  checkForOperator(event);
+  checkForKeyDownOperator(event);
 }
 
-function checkForOperator(event) {
+function checkForKeyDownOperator(event) {
   // remainder operator
   if (event.key === "%" && currentNum1 != "") {
     return getCurrentOperator(event);
@@ -203,14 +203,63 @@ function getCurrentOperator(event) {
   console.log("The CurrentOperator is: " + currentOperator);
 }
 
+// get the second number after operator was chosen
 function getCurrentNum2(event) {
-  console.log(event.type);
+  // test variable for numbers
+  let keyTest = isFinite(event.key);
+
+  // solve problem with 0 at the beginning
   if (displayNumber.textContent === "0") {
     displayNumber.textContent = "";
   }
-  displayNumber.textContent += event.target.value;
-  currentNum2 += event.target.value;
-  console.log("Current Num 2: " + currentNum2);
+
+  // click event
+  if (event.type === "click") {
+    displayNumber.textContent += event.target.value;
+    currentNum2 += event.target.value;
+    console.log("Current Num 2 click: " + currentNum2);
+
+    // keydown event
+  } else if (event.type === "keydown" && keyTest === true) {
+    // check if keydown is a digit
+    if (
+      event.key.length > 1 ||
+      event.ctrlKey ||
+      event.altKey ||
+      event.key === " "
+    ) {
+      // change text if the first key is spacebar or not a number
+      if (
+        displayNumber.textContent === "" ||
+        displayNumber.textContent === " "
+      ) {
+        displayNumber.textContent = "0";
+      }
+      return;
+    }
+    // add button key to currentNum2
+    displayNumber.textContent += event.key;
+    currentNum2 += event.key;
+    console.log("Current Num 2 keydown: " + currentNum2);
+  }
+  // check if first input is nothing
+  if (displayNumber.textContent === "" || displayNumber.textContent === " ") {
+    displayNumber.textContent = "0";
+  }
+  //  add evaluate function for keydown
+  evaluateKeyDown(event);
+}
+
+// start evalute on specific key
+function evaluateKeyDown(event) {
+  // calculate result on equal key
+  if (event.key === "=" && currentNum1 != "" && currentNum2 != "") {
+    return evaluate();
+  }
+
+  if (event.key === "Enter" && currentNum1 != "" && currentNum2 != "") {
+    return evaluate();
+  }
 }
 
 // calculate the result
@@ -235,6 +284,10 @@ function evaluate() {
     numbers[i].addEventListener("click", getCurrentNum1);
     console.log("Numbers is now for currentNum1");
   }
+
+  // keyboard support remove currentNum2 add currentNum1
+  document.removeEventListener("keydown", getCurrentNum2);
+  document.addEventListener("keydown", getCurrentNum1);
 
   if (currentOperator == "+") {
     let addResult = add(currentNum1, currentNum2);
