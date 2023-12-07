@@ -110,9 +110,51 @@ function getCurrentNum1(event) {
   if (displayNumber.textContent === "" || displayNumber.textContent === " ") {
     displayNumber.textContent = "0";
   }
-  // check for operator and give event to function
-  if (event.key === "/") {
-    getCurrentOperator(event);
+  // check for operator and give event to keydown function
+  checkForOperator(event);
+}
+
+function checkForOperator(event) {
+  // remainder operator
+  if (event.key === "%" && currentNum1 != "") {
+    return getCurrentOperator(event);
+  } else if (event.key === "%" && currentNum1 === "") {
+    return (currentNum1 = "0");
+  }
+
+  // multiply operator
+  if (event.key === "*" && currentNum1 != "") {
+    return getCurrentOperator(event);
+  } else if (event.key === "*" && currentNum1 === "") {
+    return (currentNum1 = "0");
+  }
+
+  // addition operator
+  if (event.key === "+" && currentNum1 != "") {
+    return getCurrentOperator(event);
+  } else if (event.key === "+" && currentNum1 === "") {
+    return (currentNum1 = "0");
+  }
+
+  // substraction operator
+  if (event.key === "-" && currentNum1 != "") {
+    return getCurrentOperator(event);
+  } else if (event.key === "-" && currentNum1 === "") {
+    return (currentNum1 = "0");
+  }
+
+  // addition operator
+  if (event.key === "+" && currentNum1 != "") {
+    return getCurrentOperator(event);
+  } else if (event.key === "+" && currentNum1 === "") {
+    return (currentNum1 = "0");
+  }
+
+  // divide operator
+  if (event.key === "/" && currentNum1 != "") {
+    return getCurrentOperator(event);
+  } else if (event.key === "/" && currentNum1 === "") {
+    return (currentNum1 = "0");
   }
 }
 
@@ -129,6 +171,11 @@ function getCurrentOperator(event) {
     numbers[i].removeEventListener("click", getCurrentNum1);
     numbers[i].addEventListener("click", getCurrentNum2);
   }
+
+  // keyboard support remove currentNum1 add currentNum2
+  document.removeEventListener("keydown", getCurrentNum1);
+  document.addEventListener("keydown", getCurrentNum2);
+
   // click event
   if (event.type === "click") {
     currentOperator = event.target.value;
@@ -157,6 +204,7 @@ function getCurrentOperator(event) {
 }
 
 function getCurrentNum2(event) {
+  console.log(event.type);
   if (displayNumber.textContent === "0") {
     displayNumber.textContent = "";
   }
